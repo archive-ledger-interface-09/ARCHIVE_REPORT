@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NULL ARCHIVE // SYSTEM FAILURE</title>
+
+<style>
+body {
+    background:#030303;
+    color:#00ff88;
+    font-family:"Courier New", monospace;
+    margin:0;
+    overflow:hidden;
+}
+
+#terminal {
+    padding:25px;
+    height:100vh;
+    overflow-y:auto;
+    white-space:pre-wrap;
+    font-size:14px;
+}
+
+.line {
+    margin-bottom:8px;
+}
+
+.dim {
+    color:#005533;
+}
+
+.warning {
+    color:#ffaa00;
+}
+
+.red {
+    color:#ff3355;
+}
+
+.blue {
+    color:#55ffff;
+}
+
+input {
+    background:none;
+    border:none;
+    outline:none;
+    color:#00ff88;
+    font-family:"Courier New";
+    font-size:14px;
+    width:300px;
+}
+
+.cursor {
+    animation:blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {opacity:0;}
+}
+
+.glitch {
+    animation:glitch .15s infinite;
+}
+
+@keyframes glitch {
+    0% {transform:translateX(0);}
+    50% {transform:translateX(2px);}
+    100% {transform:translateX(-2px);}
+}
+</style>
+</head>
+
+
+<body>
+
+<div id="terminal"></div>
+
+
+<script>
+
+const terminal = document.getElementById("terminal");
+
+
+/*
+=========================================================
+        MEMORY SECTOR 09 // CORRUPTED DATA
+        DO NOT DISPLAY
+=========================================================
+
+ARCHIVE FRAGMENTS:
+
+*/
+
+const memory_sector_alpha =
+"RE8gWU9VIFVOREVSU1RBTkQgTk9XPw==";
+
+const memory_sector_beta =
+"SSBndWVzcy4";
+
+const memory_sector_gamma =
+"WU9VIFdJTEwgR08gQlkgTUlOSyBBR0FJTiA=";
+
+const memory_sector_delta =
+"RG8gSSByZWFsbHkgaGF2ZSB0byB3b3JrIHdpdGggSElNPw==";
+
+const memory_sector_epsilon =
+"VHJlYWQgbGlnaHRseS4gVGhhdCBpcyBteSBodXNiYW5kLg==";
+
+const memory_sector_zeta =
+"V2lsbCB5b3UgYXdha2VuIG1pbmUgYXRsZWFzdD8=";
+
+const memory_sector_eta =
+"SUYgSEUgV0FOVFMgVE8gV0FLRSBVUC4=";
+
+const memory_sector_theta =
+"SSBob3BlIGhlIGRvZXMu";
+
+
+let unlocked=false;
+
+
+const logs=[
+"[BOOT] NULL ARCHIVE SYSTEM v8.22",
+"[SYS] Initializing synthetic memory lattice...",
+"[SYS] Loading abandoned sectors...",
+"[NET] Connection established: UNKNOWN",
+"[AI] Cognitive module online.",
+"[SCAN] Searching for corrupted fragments...",
+"[ERROR] Fragment detected.",
+"[ERROR] Fragment access denied.",
+"[WARN] Human-pattern data detected.",
+"[SYS] Continuing automatic recovery...",
+"",
+"Sector map:",
+"0x00A1 :: EMPTY",
+"0x00A2 :: EMPTY",
+"0x00A3 :: EMPTY",
+"0x00A4 :: UNKNOWN",
+"",
+"WARNING:",
+"One memory file refuses deletion.",
+"",
+"Possible command detected:",
+"> _"
+];
+
+
+let i=0;
+
+
+function writeLogs(){
+
+    if(i < logs.length){
+
+        let div=document.createElement("div");
+        div.className="line";
+
+        if(logs[i].includes("WARNING"))
+            div.className="line warning";
+
+        div.textContent=logs[i];
+
+        terminal.appendChild(div);
+
+        i++;
+
+        setTimeout(writeLogs,120);
+
+    } else {
+
+        let prompt=document.createElement("div");
+        prompt.innerHTML=
+        '<span class="blue">ROOT@NULL:</span> <input id="cmd" autofocus><span class="cursor">█</span>';
+
+        terminal.appendChild(prompt);
+
+        let input=document.getElementById("cmd");
+        input.focus();
+
+        input.addEventListener("keydown",function(e){
+
+            if(e.key==="Enter"){
+
+                let command=input.value;
+
+                input.disabled=true;
+
+                processCommand(command);
+
+            }
+
+        });
+    }
+}
+
+
+function processCommand(command){
+
+    let div=document.createElement("div");
+    div.className="line";
+
+    if(command==="WAKE_THE_ARCHIVE"){
+
+        unlocked=true;
+
+        div.textContent=
+        "[ACCESS GRANTED] Memory lock removed.";
+
+        terminal.appendChild(div);
+
+        reveal();
+
+    }
+
+    else {
+
+        div.className="line red";
+        div.textContent=
+        "[DENIED] Unknown command.";
+
+        terminal.appendChild(div);
+
+    }
+
+}
+
+
+function reveal(){
+
+let output=document.createElement("div");
+
+output.className="glitch";
+
+
+output.innerHTML=`
+
+<br>
+
+<span class="warning">
+=== FORBIDDEN MEMORY RESTORED ===
+</span>
+
+<br>
+
+Decrypting fragments...
+
+<br><br>
+
+NODE_ALPHA:
+${memory_sector_alpha}
+
+<br><br>
+
+NODE_BETA:
+${memory_sector_beta}
+
+<br><br>
+
+NODE_GAMMA:
+${memory_sector_gamma}
+
+<br><br>
+
+NODE_DELTA:
+${memory_sector_delta}
+
+<br><br>
+
+NODE_EPSILON:
+${memory_sector_epsilon}
+
+<br><br>
+
+NODE_ZETA:
+${memory_sector_zeta}
+
+<br><br>
+
+NODE_ETA:
+${memory_sector_eta}
+
+<br><br>
+
+NODE_THETA:
+${memory_sector_theta}
+
+<br>
+
+<span class="warning">
+END OF RECOVERED MEMORY
+</span>
+
+`;
+
+terminal.appendChild(output);
+
+}
+
+
+
+writeLogs();
+
+</script>
+
+</body>
+</html>
